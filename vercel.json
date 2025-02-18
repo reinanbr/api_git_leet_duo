@@ -8,6 +8,10 @@
         {
             "src": "api/git/git_user.go",
             "use": "@vercel/go"
+        },
+        {
+            "src": "api/git/git_langs.go",
+            "use": "@vercel/go"
         }
     ],
     "rewrites": [
@@ -18,7 +22,11 @@
         {
             "source": "/api/git/git_user",
             "destination": "api/git/git_user.go"
+        },{
+            "source": "/api/git/git_langs",
+            "destination": "api/git/git_langs.go"
         },
+        
         {
             "source": "/doc/(.*)",
             "destination": "public/"
