@@ -10,15 +10,12 @@ import (
 	"net/http"
 )
 
-
-
-
 type UserInfo struct {
-	Name                    string `json:"name"`
-	Login                   string `json:"login"`
-	Bio                     string `json:"bio"`
-	AvatarUrl               string `json:"avatarUrl"`
-	CreatedAt               string `json:"createdAt"`
+	Name      string `json:"name"`
+	Login     string `json:"login"`
+	Bio       string `json:"bio"`
+	AvatarUrl string `json:"avatarUrl"`
+	CreatedAt string `json:"createdAt"`
 }
 
 type ResponseInfo struct {
@@ -29,7 +26,6 @@ type ResponseInfo struct {
 		Message string `json:"message"`
 	} `json:"errors"`
 }
-
 
 func FetchUserData(user string) (UserInfo, error) {
 	token, err := auth.GetGitHubTokenNative()
@@ -70,4 +66,3 @@ func FetchUserData(user string) (UserInfo, error) {
 
 	return response.Data.UserInfo, nil
 }
-

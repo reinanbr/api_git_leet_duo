@@ -1,19 +1,28 @@
 {
     "version": 2,
     "builds": [
-      {
-        "src": "api/read/index.go",
-        "use": "@vercel/go"
-      },    {
-        "src": "api/sex/index.go",
-        "use": "@vercel/go"
-      }
-    ],
-    "routes": [
-      {"src": "/api/sex",
-              "dest": "/api/sex/index.go"
+        {
+            "src": "api/git/git_contrib.go",
+            "use": "@vercel/go"
         },
-      {"src":"/api/read",
-       "dest":"/api/read/index.go"}
-        ]  
-  }
+        {
+            "src": "api/git/git_user.go",
+            "use": "@vercel/go"
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/api/git/git_contrib",
+            "destination": "api/git/git_contrib.go"
+        },
+        {
+            "source": "/api/git/git_user",
+            "destination": "api/git/git_user.go"
+        },
+        {
+            "source": "/doc/(.*)",
+            "destination": "public/"
+        }
+    ],
+    "cleanUrls": true
+}
