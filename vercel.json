@@ -16,14 +16,14 @@
     ],
     "rewrites": [
         {
-            "source": "/api/git/git_contrib",
+            "source": "/api/git/contrib",
             "destination": "api/git/git_contrib.go"
         },
         {
-            "source": "/api/git/git_user",
+            "source": "/api/git/user",
             "destination": "api/git/git_user.go"
         },{
-            "source": "/api/git/git_langs",
+            "source": "/api/git/repo",
             "destination": "api/git/git_langs.go"
         },
         
