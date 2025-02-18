@@ -15,7 +15,7 @@
         },
         {
             "src":"api/duo/duo_user.go",
-            "dist":"@vercel/go"
+            "use":"@vercel/go"
         }
     ],
     "rewrites": [
