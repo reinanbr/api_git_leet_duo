@@ -22,7 +22,7 @@ func GitLangs(w http.ResponseWriter, r *http.Request) {
 
 	// Monta a resposta JSON
 	response := make(map[string]interface{})
-	response["langs"] = langs
+	response["repo"] = langs
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
