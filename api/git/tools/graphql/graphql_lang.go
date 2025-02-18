@@ -10,7 +10,7 @@ func BuildGraphQLQueryLang(user string) string {
 	return fmt.Sprintf(`
 {
   user(login: "%s") {
-    repositories(first: 100) {
+    repositories(first: 100, privacy: PUBLIC ) {
       nodes {
         name
         createdAt
