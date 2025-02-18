@@ -12,6 +12,10 @@
         {
             "src": "api/git/git_langs.go",
             "use": "@vercel/go"
+        },
+        {
+            "src":"api/duo/duo_user.go",
+            "dist":"@vercel/go"
         }
     ],
     "rewrites": [
@@ -26,7 +30,10 @@
             "source": "/api/git/repo",
             "destination": "api/git/git_langs.go"
         },
-        
+        {
+            "source":"/api/duo/user",
+            "destination":"api/duo/duo_user.go"
+        },
         {
             "source": "/doc/(.*)",
             "destination": "public/"
