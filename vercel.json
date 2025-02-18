@@ -1,0 +1,19 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "api/read/index.go",
+        "use": "@vercel/go"
+      },    {
+        "src": "api/sex/index.go",
+        "use": "@vercel/go"
+      }
+    ],
+    "routes": [
+      {"src": "/api/sex",
+              "dest": "/api/sex/index.go"
+        },
+      {"src":"/api/read",
+       "dest":"/api/read/index.go"}
+        ]  
+  }
