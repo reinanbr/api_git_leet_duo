@@ -14,7 +14,7 @@ func GitLangs(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	langs, err := languages.FetchUserLangs(username)
+	langs, err := languages.FetchUserLangsFull(username)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error retrieving graphsLangs: %v", err), http.StatusInternalServerError)
 		return

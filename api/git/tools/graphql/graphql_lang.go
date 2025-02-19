@@ -5,7 +5,7 @@ import (
 )
 
 
-func BuildGraphQLQueryLang(user string) string {
+func BuildGraphQLQueryLangFull(user string) string {
 	// Esta consulta irá pegar o histórico de contribuições completo desde que o usuário entrou no GitHub
 	return fmt.Sprintf(`
 {
@@ -38,6 +38,23 @@ func BuildGraphQLQueryLang(user string) string {
 	`, user)
 }
 
+
+func BuildGraphQLQueryLite(user string) string {
+	// Esta consulta irá pegar o histórico de contribuições completo desde que o usuário entrou no GitHub
+	return fmt.Sprintf(`
+{
+  user(login: "%s") {
+    repositories(first: 100, privacy: PUBLIC ) {
+      nodes {
+        name
+      }
+    }
+  }
+}
+
+
+	`, user)
+}
 
 
 

@@ -14,6 +14,10 @@
             "use": "@vercel/go"
         },
         {
+            "src": "api/git/git_lang_lite.go",
+            "use": "@vercel/go"
+        },
+        {
             "src":"api/duo/duo_user.go",
             "use":"@vercel/go"
         },
@@ -30,9 +34,14 @@
         {
             "source": "/api/git/user",
             "destination": "api/git/git_user.go"
-        },{
-            "source": "/api/git/repo",
+        },
+        {
+            "source": "/api/git/repo_full",
             "destination": "api/git/git_langs.go"
+        },
+        {
+            "source": "/api/git/repo_name",
+            "destination": "api/git/git_lang_lite.go"
         },
         {
             "source":"/api/duo/user",

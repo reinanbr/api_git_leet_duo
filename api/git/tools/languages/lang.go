@@ -49,13 +49,35 @@ type ResponseLangs struct {
 }
 
 
-func FetchUserLangs(user string) (Repo, error) {
+type RepositoryLite struct {
+	Name	  	string `json:"name"`
+}
+
+
+type RepoLite struct {
+	Repositories struct {
+		Nodes []RepositoryLite `json:"nodes"`
+	} `json:"repositories"`
+}
+
+type ResponseLite struct {
+	Data struct {
+		Repo RepoLite `json:"user"`
+	} `json:"data"`
+	Errors []struct {
+		Message string `json:"message"`
+	} `json:"errors"`
+}
+
+
+
+func FetchUserLangsFull(user string) (Repo, error) {
 	token, err := auth.GetGitHubTokenNative()
 	if err != nil {
 		return Repo{}, err
 	}
 
-	query := graphql.BuildGraphQLQueryLang(user)
+	query := graphql.BuildGraphQLQueryLangFull(user)
 	body, _ := json.Marshal(graphql.GraphQLQuery{Query: query})
 
 	req, err := http.NewRequest("POST", "https://api.github.com/graphql", bytes.NewBuffer(body))
@@ -84,6 +106,52 @@ func FetchUserLangs(user string) (Repo, error) {
 
 	if len(response.Errors) > 0 {
 		return Repo{}, errors.New(response.Errors[0].Message)
+	}
+
+	return response.Data.Repo, nil
+}
+
+
+
+
+
+
+
+func FetchUserLite(user string)  (RepoLite, error) {
+	token, err := auth.GetGitHubTokenNative()
+	if err != nil {
+		return RepoLite{}, err
+	}
+
+	query := graphql.BuildGraphQLQueryLite(user)
+	body, _ := json.Marshal(graphql.GraphQLQuery{Query: query})
+
+	req, err := http.NewRequest("POST", "https://api.github.com/graphql", bytes.NewBuffer(body))
+	if err != nil {
+		return RepoLite{}, err
+	}
+
+	req.Header.Set("Authorization", "Bearer "+token)
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return RepoLite{}, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return RepoLite{}, fmt.Errorf("erro na requisição: status %d", resp.StatusCode)
+	}
+
+	var response ResponseLite
+	err = json.NewDecoder(resp.Body).Decode(&response)
+	if err != nil {
+		return RepoLite{}, err
+	}
+
+	if len(response.Errors) > 0 {
+		return RepoLite{}, errors.New(response.Errors[0].Message)
 	}
 
 	return response.Data.Repo, nil
