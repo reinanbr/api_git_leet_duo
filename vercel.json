@@ -16,6 +16,10 @@
         {
             "src":"api/duo/duo_user.go",
             "use":"@vercel/go"
+        },
+        {
+            "src":"api/leet/leet_user.go",
+            "use":"@vercel/go"
         }
     ],
     "rewrites": [
@@ -33,6 +37,10 @@
         {
             "source":"/api/duo/user",
             "destination":"api/duo/duo_user.go"
+        },
+        {
+            "source":"/api/leet/user",
+            "destination":"api/leet/leet_user.go"
         },
         {
             "source": "/doc/(.*)",
