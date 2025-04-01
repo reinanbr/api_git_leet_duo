@@ -41,7 +41,7 @@
         },
         {
             "source": "/api/git/repo_name",
-            "destination": "api/git/git_lang_lite.go"
+            "destination": "api/git/git_repo_name.go"
         },
         {
             "source":"/api/duo/user",

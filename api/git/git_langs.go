@@ -22,7 +22,9 @@ func GitLangs(w http.ResponseWriter, r *http.Request) {
 
 	// Monta a resposta JSON
 	response := make(map[string]interface{})
-	response["repo"] = langs
+	langs_percent,totalSize := languages.CalculateLanguagePercentage(langs)
+	response["total_size"] = totalSize
+	response["percent_lang"] = langs_percent
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)

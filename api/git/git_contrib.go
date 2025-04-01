@@ -28,10 +28,13 @@ func GitContrib(w http.ResponseWriter, r *http.Request) {
 	}
 	sort.Ints(sortYears)
 
+	maxStreak, currentStreak := contribuitions.GetContributionStreaks(graphs)
+
 	// Monta a resposta JSON
 	response := make(map[string]interface{})
 	response["user"] = username
 	response["contributions"] = graphs
+	response["streak"] = map[string]interface{}{"max_streak": maxStreak, "current_streak": currentStreak}
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)

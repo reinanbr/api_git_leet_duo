@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// Define a rota para a API
-	http.HandleFunc("/github", git.GitRepoLite)
+	http.HandleFunc("/github", git.GitPainel)
 
 	// Inicia o servidor na porta 8080
 	fmt.Println("Servidor iniciado na porta 8080...")
