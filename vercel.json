@@ -24,7 +24,9 @@
         {
             "src":"api/leet/leet_user.go",
             "use":"@vercel/go"
-        }
+        },
+        {"src":"api/git/git_info_painel.go",
+        "use":"@vercel/go"}
     ],
     "rewrites": [
         {
