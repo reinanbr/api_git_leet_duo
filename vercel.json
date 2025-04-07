@@ -43,6 +43,9 @@
             "source": "/api/git/repo_name",
             "destination": "api/git/git_repo_name.go"
         },
+        {"source":"/api/git/info",
+            "destination":"api/git/git_info_painel.go"
+        },
         {
             "source":"/api/duo/user",
             "destination":"api/duo/duo_user.go"

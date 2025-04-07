@@ -27,3 +27,31 @@
     * percent lang xp
 
 Neste primeiro monento, focar apenas nas coisas que serão importantes para o painel. Mais tarde, especializar melhor as informações e criar exemplos de como usar essas api.
+
+
+**06.04.25 23:17**
+
+    Acredito que o contribuitions deve seguir o modelo de
+
+`{
+    $start = "$year-01-01T00:00:00Z";
+    $end = "$year-12-31T23:59:59Z";
+    return "query {
+        user(login: \"$user\") {
+            createdAt
+            contributionsCollection(from: \"$start\", to: \"$end\") {
+                contributionYears
+                contributionCalendar {
+                    weeks {
+                        contributionDays {
+                            contributionCount
+                            date
+                        }
+                    }
+                }
+            }
+        }
+    }";
+}`
+
+Com isso, cada ponto no git, teria seu proprio query, e não apenas para todos.

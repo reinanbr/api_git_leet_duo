@@ -136,6 +136,26 @@ func GetTotalContributions(responses map[int]graphql.Response) int {
 	return totalContributions
 }
 
+
+//total contributions by year
+// GetContributionsByYear calculates the total contributions for each year.
+func GetContributionsByYear(responses map[int]graphql.Response) map[int]int {
+	contributionsByYear := make(map[int]int)
+
+	for year, response := range responses {
+		totalContributions := 0
+		for _, week := range response.Data.User.ContributionsCollection.ContributionCalendar.Weeks {
+			for _, day := range week.ContributionDays {
+				totalContributions += day.ContributionCount
+			}
+		}
+		contributionsByYear[year] = totalContributions
+	}
+
+	return contributionsByYear
+}
+
+
 // max returns the maximum of two integers.
 func max(a, b int) int {
 	if a > b {

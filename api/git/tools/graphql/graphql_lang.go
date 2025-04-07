@@ -22,7 +22,7 @@ func BuildGraphQLQueryLangFull(user string) (string, error) {
   query := `
 {
   user(login: "%s") {
-  repositories(first: 100) {
+  repositories(first: 100,privacy: PUBLIC) {
     nodes {
     name
     createdAt
@@ -58,7 +58,7 @@ func BuildGraphQLQueryLite(user string) (string, error) {
   query := `
 {
   user(login: "%s") {
-  repositories(first: 100) {
+  repositories(first: 100,privacy: PUBLIC) {
     nodes {
     name
     }

@@ -41,6 +41,38 @@ func addGitInfo(response map[string]interface{}, username string) error {
 		return fmt.Errorf("error retrieving user info: %w", err)
 	}
 	response["user"] = userInfo
+	
+	// Fetch user contribution history starting from 2015
+	startingYear := 2015
+	graphs, err := contribuitions.GetContributionGraphs(username, startingYear)
+	if err != nil {
+		return fmt.Errorf("error retrieving contribution info: %w", err)
+	}
+
+	// Sort contribution years in ascending order
+	sortYears := []int{}
+	for year := range graphs {
+		sortYears = append(sortYears, year)
+	}
+	sort.Ints(sortYears)
+
+	// Calculate contribution streaks (max and current)
+	maxStreak, currentStreak := contribuitions.GetContributionStreaks(graphs)
+	response["streak"] = map[string]interface{}{
+		"max_streak":    maxStreak,
+		"current_streak": currentStreak,
+	}
+	
+	//total contributions
+	
+	totalContributions := contribuitions.GetTotalContributions(graphs)
+	//total contributions by year
+	totalContributionsByYear := contribuitions.GetContributionsByYear(graphs)
+
+	response["contribuitions"] = map[string]interface{}{
+		"total": totalContributions,
+		"by_year": totalContributionsByYear,
+	}
 
 	// Fetch detailed language usage statistics
 	langs, err := languages.FetchUserLangsFull(username)
@@ -62,26 +94,6 @@ func addGitInfo(response map[string]interface{}, username string) error {
 	}
 	response["repos"] = langsLite
 
-	// Fetch user contribution history starting from 2015
-	startingYear := 2015
-	graphs, err := contribuitions.GetContributionGraphs(username, startingYear)
-	if err != nil {
-		return fmt.Errorf("error retrieving contribution info: %w", err)
-	}
-
-	// Sort contribution years in ascending order
-	sortYears := []int{}
-	for year := range graphs {
-		sortYears = append(sortYears, year)
-	}
-	sort.Ints(sortYears)
-
-	// Calculate contribution streaks (max and current)
-	maxStreak, currentStreak := contribuitions.GetContributionStreaks(graphs)
-	response["streak"] = map[string]interface{}{
-		"max_streak":    maxStreak,
-		"current_streak": currentStreak,
-	}
 
 	return nil
 }
