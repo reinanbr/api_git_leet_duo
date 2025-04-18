@@ -7,16 +7,19 @@ import (
 
 )
 
+
 type UserData struct {
-	Fullname    string `json:"fullname"`
-	Username    string `json:"username"`
-	Avatar      string `json:"avatar"`
-	CreationDate string `json:"creation_date"`
-	Courses     []struct {
+	Fullname     string       `json:"fullname"`
+	Username     string       `json:"username"`
+	Avatar       string       `json:"avatar"`
+	CreationDate string       `json:"creation_date"`
+	Courses      []struct {
 		Title string `json:"title"`
 		XP    int    `json:"xp"`
 	} `json:"courses"`
+	XPByLanguage []tools.LanguageXP `json:"xp_by_language"` // <-- Novo campo
 }
+
 
 type APIResponse struct {
 	Users []UserData `json:"users"`

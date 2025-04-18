@@ -4,10 +4,17 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"sort"
 )
 
 type DuolingoResponse struct {
 	Users []User `json:"users"`
+}
+
+
+type LanguageXP struct {
+	LanguageID string  `json:"language_id"`
+	Percentage float64 `json:"percentage"`
 }
 
 type User struct {
@@ -28,6 +35,8 @@ type User struct {
 			EndDate  string `json:"endDate"`
 		} `json:"currentStreak"`
 	} `json:"streakData"`
+	XPByLanguage []LanguageXP `json:"xp_by_language"` // Added field
+
 }
 
 type Course struct {
@@ -40,7 +49,7 @@ type Course struct {
 }
 
 func FetchDuolingoUser(user string) (User, error) {
-	url := fmt.Sprintf("https://www.duolingo.com/2017-06-30/users?username=%s&fields=streak,streakData%7BcurrentStreak,previousStreak%7D%7D", user)
+	url := fmt.Sprintf("https://www.duolingo.com/2017-06-30/users?username=%s&fields=streak,streakData%%7BcurrentStreak,previousStreak%%7D%%7D", user)
 	resp, err := http.Get(url)
 	if err != nil {
 		return User{}, err
@@ -56,5 +65,40 @@ func FetchDuolingoUser(user string) (User, error) {
 		return User{}, fmt.Errorf("usuário não encontrado")
 	}
 
-	return data.Users[0], nil
+	userData := data.Users[0]
+
+	// Usa a função separada
+	userData.XPByLanguage = CalculateXPByLanguage(userData.Courses)
+
+	return userData, nil
+}
+
+
+
+func CalculateXPByLanguage(courses []Course) []LanguageXP {
+	totalXP := 0
+	languageXP := make(map[string]int)
+
+	for _, course := range courses {
+		languageXP[course.Title] += course.XP
+		totalXP += course.XP
+	}
+
+	var xpPercentages []LanguageXP
+	if totalXP > 0 {
+		for lang, xp := range languageXP {
+			percentage := (float64(xp) / float64(totalXP)) * 100
+			xpPercentages = append(xpPercentages, LanguageXP{
+				LanguageID: lang,
+				Percentage: percentage,
+			})
+		}
+	}
+
+	// Ordena do maior para o menor
+	sort.Slice(xpPercentages, func(i, j int) bool {
+		return xpPercentages[i].Percentage > xpPercentages[j].Percentage
+	})
+
+	return xpPercentages
 }
