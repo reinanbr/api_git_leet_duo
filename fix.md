@@ -55,3 +55,14 @@ Neste primeiro monento, focar apenas nas coisas que serão importantes para o pa
 }`
 
 Com isso, cada ponto no git, teria seu proprio query, e não apenas para todos.
+
+
+**13:11 12/04/25, casa de Denise**
+
+  Acredito que a melhor documentação para essa API, seja
+    / api
+      /git
+      /duo
+      /leet
+  Em  que retorne as informações essenciais de cada site.
+      
