@@ -46,10 +46,9 @@ func BuildGraphQLQueryRepos(user string, cursor *string) string {
 		after = fmt.Sprintf(`, after: "%s"`, *cursor)
 	}
 
-	return fmt.Sprintf(`
-	{
+	return fmt.Sprintf(`{
 		user(login: "%s") {
-			repositories(first: 100, privacy: PUBLIC%s) {
+			repositories(first: 100%s) {
 				pageInfo {
 					hasNextPage
 					endCursor
@@ -68,9 +67,9 @@ func BuildGraphQLQueryRepos(user string, cursor *string) string {
 				}
 			}
 		}
-	}
-	`, user, after)
+	}`, user, after)
 }
+
 
 // Função principal para buscar todos os repositórios
 func FetchAllRepos(user string, token string, cursor *string) ([]RepoNode, error) {
