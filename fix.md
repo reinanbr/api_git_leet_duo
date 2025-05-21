@@ -65,4 +65,3 @@ Com isso, cada ponto no git, teria seu proprio query, e não apenas para todos.
       /duo
       /leet
   Em  que retorne as informações essenciais de cada site.
-      

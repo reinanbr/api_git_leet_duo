@@ -2,23 +2,17 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
-//	git "api_git_leet_duo/api/git"
 
-	duo "api_git_leet_duo/api/duo"
-//	leet "api_git_leet_duo/api/leet"
-
-//	duo "api_git_leet_duo/api/duo"
+	"api_git_leet_duo/api/git/handler"
 )
 
-
-
 func main() {
+	http.HandleFunc("/git/user", handler.GitUser)
+	http.HandleFunc("/git/repos", handler.GitRepos)
+	http.HandleFunc("/git/langs", handler.GitLangs)
 
-	http.HandleFunc("/github", duo.DuoUser)
-	// Inicia o servidor na porta 8080
-	fmt.Println("Servidor iniciado na porta 8080...")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		fmt.Println("Erro ao iniciar o servidor:", err)
-	}
+	fmt.Println("Servidor rodando em http://localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
