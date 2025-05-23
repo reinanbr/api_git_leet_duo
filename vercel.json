@@ -43,7 +43,7 @@
         },
         {
             "source": "/api/git/langs",
-            "destination": "api/git/git_langs.go"
+            "destination": "api/git/handler/langs.go"
         },
         {
             "source": "/api/git/repos",
