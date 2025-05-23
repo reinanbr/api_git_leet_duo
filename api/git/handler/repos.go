@@ -9,7 +9,9 @@ import (
 	"api_git_leet_duo/api/git/utils"
 )
 
-func GitUser(w http.ResponseWriter, r *http.Request) {
+
+
+func GitRepos(w http.ResponseWriter, r *http.Request) {
 	username := r.URL.Query().Get("user")
 	if username == "" {
 		http.Error(w, "Missing 'user' parameter", http.StatusBadRequest)
@@ -22,14 +24,14 @@ func GitUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userInfo, err := service.FetchUserInfo(username, token)
+	repos, err := service.FetchAllRepos(username, token, nil)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Erro ao obter dados do usuário: %v", err), http.StatusInternalServerError)
+		http.Error(w, fmt.Sprintf("Erro ao obter repositórios: %v", err), http.StatusInternalServerError)
 		return
 	}
 
 	response := map[string]interface{}{
-		"user": userInfo,
+		"repositories": repos,
 	}
 
 	w.Header().Set("Content-Type", "application/json")

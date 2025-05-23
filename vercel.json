@@ -2,19 +2,23 @@
     "version": 2,
     "builds": [
         {
-            "src": "api/git/git_contrib.go",
+            "src": "api/git/handler/commit.go",
             "use": "@vercel/go"
         },
         {
-            "src": "api/git/git_user.go",
+            "src":  "api/git/handler/user.go",
             "use": "@vercel/go"
         },
         {
-            "src": "api/git/git_langs.go",
+            "src": "api/git/handler/streak.go",
             "use": "@vercel/go"
         },
         {
-            "src": "api/git/git_lang_lite.go",
+            "src": "api/git/handler/langs.go",
+            "use": "@vercel/go"
+        },
+         {
+            "src": "api/git/handler/repos.go",
             "use": "@vercel/go"
         },
         {
@@ -30,20 +34,20 @@
     ],
     "rewrites": [
         {
-            "source": "/api/git/contrib",
-            "destination": "api/git/git_contrib.go"
+            "source": "/api/git/commit",
+            "destination": "api/git/git_commit.go"
         },
         {
             "source": "/api/git/user",
-            "destination": "api/git/git_user.go"
+            "destination": "api/git/handler/user.go"
         },
         {
-            "source": "/api/git/repo_full",
+            "source": "/api/git/langs",
             "destination": "api/git/git_langs.go"
         },
         {
-            "source": "/api/git/repo_name",
-            "destination": "api/git/git_repo_name.go"
+            "source": "/api/git/repos",
+            "destination": "api/git/handler/repos.go"
         },
         {"source":"/api/git/info",
             "destination":"api/git/git_info_painel.go"
