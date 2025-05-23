@@ -49,6 +49,10 @@
             "source": "/api/git/repos",
             "destination": "api/git/handler/repos.go"
         },
+        {
+            "source": "/api/git/streak",
+            "destination": "api/git/handler/streak.go"
+        },
         {"source":"/api/git/info",
             "destination":"api/git/git_info_painel.go"
         },
