@@ -8,19 +8,42 @@ import (
 	"net/http"
 )
 
-// Estruturas necessárias
+type LanguageEdge struct {
+	Size int `json:"size"`
+	Node struct {
+		Name string `json:"name"`
+	} `json:"node"`
+}
+
 type RepoNode struct {
 	Name      string `json:"name"`
 	CreatedAt string `json:"createdAt"`
 	Languages struct {
-		Edges []struct {
-			Size int `json:"size"`
-			Node struct {
-				Name string `json:"name"`
-			} `json:"node"`
-		} `json:"edges"`
+		Edges []LanguageEdge `json:"edges"`
 	} `json:"languages"`
 }
+
+type PageInfo struct {
+	HasNextPage bool   `json:"hasNextPage"`
+	EndCursor   string `json:"endCursor"`
+}
+
+type Repositories struct {
+	PageInfo PageInfo    `json:"pageInfo"`
+	Nodes    []RepoNode  `json:"nodes"`
+}
+
+type UserRepositories struct {
+	Repositories Repositories `json:"repositories"`
+}
+
+type GraphQLReposResponse struct {
+	User UserRepositories `json:"user"`
+}
+
+
+// Estruturas necessárias
+
 
 type RepoResponse struct {
 	Data struct {
@@ -39,6 +62,8 @@ type RepoResponse struct {
 	} `json:"errors"`
 }
 
+
+
 // Monta a query para GraphQL
 func BuildGraphQLQueryRepos(user string, cursor *string) string {
 	after := ""
@@ -46,9 +71,10 @@ func BuildGraphQLQueryRepos(user string, cursor *string) string {
 		after = fmt.Sprintf(`, after: "%s"`, *cursor)
 	}
 
-	return fmt.Sprintf(`{
+	return fmt.Sprintf(`
+	{
 		user(login: "%s") {
-			repositories(first: 100%s) {
+			repositories(first: 100, isFork: false%s) {
 				pageInfo {
 					hasNextPage
 					endCursor
@@ -67,7 +93,8 @@ func BuildGraphQLQueryRepos(user string, cursor *string) string {
 				}
 			}
 		}
-	}`, user, after)
+	}
+	`, user, after)
 }
 
 
