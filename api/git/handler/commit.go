@@ -34,6 +34,17 @@ func GitCommit(w http.ResponseWriter, r *http.Request) {
 	response["user"] = username
 	response["commit"] = graphs
 
+	// Calcula o total de commits
+	total := 0
+	for _, year := range sortYears {
+		for _, week := range graphs[year].Data.User.ContributionsCollection.ContributionCalendar.Weeks {
+			for _, day := range week.ContributionDays {
+				total += day.ContributionCount
+			}
+		}
+	}
+	response["total"] = total
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }

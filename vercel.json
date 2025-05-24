@@ -53,9 +53,6 @@
             "source": "/api/git/streak",
             "destination": "api/git/handler/streak.go"
         },
-        {"source":"/api/git/info",
-            "destination":"api/git/git_info_painel.go"
-        },
         {
             "source":"/api/duo/user",
             "destination":"api/duo/duo_user.go"
