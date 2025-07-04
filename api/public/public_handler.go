@@ -9,6 +9,6 @@ func PublicHandle() http.HandlerFunc {
 	fs := http.FileServer(http.Dir("./public"))
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Remove "/public/" do início da URL para mapear corretamente o arquivo
-		http.StripPrefix("/doc/", fs).ServeHTTP(w, r)
+		http.StripPrefix("/api/doc/", fs).ServeHTTP(w, r)
 	}
 }
