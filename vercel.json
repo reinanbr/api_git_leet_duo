@@ -67,7 +67,8 @@
         {
             "source": "/api/doc",
             "destination": "api/public/public_handler.go"
-        }
+        },
+        [{ "source": "/(.*)", "destination": "public/index.html" }]
     ],
     "cleanUrls": true,
     "headers": [
