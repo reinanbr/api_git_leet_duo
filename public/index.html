@@ -3,20 +3,316 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>API Git Leet Duo - Documentation</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+            }
+            
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            
+            .header {
+                text-align: center;
+                color: white;
+                margin-bottom: 40px;
+            }
+            
+            .header h1 {
+                font-size: 3rem;
+                margin-bottom: 10px;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            
+            .header p {
+                font-size: 1.2rem;
+                opacity: 0.9;
+            }
+            
+            .api-section {
+                background: white;
+                border-radius: 10px;
+                padding: 30px;
+                margin-bottom: 30px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            
+            .api-section h2 {
+                color: #667eea;
+                margin-bottom: 20px;
+                font-size: 2rem;
+                border-bottom: 3px solid #667eea;
+                padding-bottom: 10px;
+            }
+            
+            .endpoint {
+                background: #f8f9fa;
+                border-left: 4px solid #667eea;
+                padding: 20px;
+                margin: 20px 0;
+                border-radius: 5px;
+            }
+            
+            .endpoint h3 {
+                color: #333;
+                margin-bottom: 10px;
+                font-size: 1.3rem;
+            }
+            
+            .method {
+                display: inline-block;
+                background: #28a745;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 3px;
+                font-weight: bold;
+                margin-right: 10px;
+            }
+            
+            .url {
+                font-family: 'Courier New', monospace;
+                background: #e9ecef;
+                padding: 5px 10px;
+                border-radius: 3px;
+                color: #495057;
+            }
+            
+            .test-form {
+                margin-top: 15px;
+                padding: 15px;
+                background: white;
+                border-radius: 5px;
+                border: 1px solid #dee2e6;
+            }
+            
+            .test-form input {
+                padding: 8px 12px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                margin-right: 10px;
+                width: 200px;
+            }
+            
+            .test-form button {
+                background: #667eea;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+            
+            .test-form button:hover {
+                background: #5a6fd8;
+            }
+            
+            .response {
+                margin-top: 15px;
+                padding: 15px;
+                background: #f8f9fa;
+                border-radius: 5px;
+                border: 1px solid #dee2e6;
+                max-height: 300px;
+                overflow-y: auto;
+                display: none;
+            }
+            
+            .response pre {
+                margin: 0;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+            
+            .loading {
+                color: #667eea;
+                font-style: italic;
+            }
+            
+            .error {
+                color: #dc3545;
+            }
+            
+            .success {
+                color: #28a745;
+            }
+            
+            .footer {
+                text-align: center;
+                color: white;
+                margin-top: 40px;
+                opacity: 0.8;
+            }
+        </style>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h1>eh pra ir, neh vei </h1>
-        <script src="" async defer></script>
+        <div class="container">
+            <div class="header">
+                <h1>🚀 API Git Leet Duo</h1>
+                <p>Comprehensive API for GitHub, LeetCode, and Duolingo data</p>
+            </div>
+
+            <div class="api-section">
+                <h2>📊 GitHub API</h2>
+                
+                <div class="endpoint">
+                    <h3><span class="method">GET</span> <span class="url">/api/git/user</span></h3>
+                    <p>Get user profile information from GitHub</p>
+                    <div class="test-form">
+                        <input type="text" id="git-user-input" placeholder="GitHub username" value="reinanbr">
+                        <button onclick="testGitUser()">Test API</button>
+                        <div id="git-user-response" class="response"></div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <h3><span class="method">GET</span> <span class="url">/api/git/repos</span></h3>
+                    <p>Get user repositories with language information</p>
+                    <div class="test-form">
+                        <input type="text" id="git-repos-input" placeholder="GitHub username" value="reinanbr">
+                        <button onclick="testGitRepos()">Test API</button>
+                        <div id="git-repos-response" class="response"></div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <h3><span class="method">GET</span> <span class="url">/api/git/langs</span></h3>
+                    <p>Get programming languages used by the user</p>
+                    <div class="test-form">
+                        <input type="text" id="git-langs-input" placeholder="GitHub username" value="reinanbr">
+                        <button onclick="testGitLangs()">Test API</button>
+                        <div id="git-langs-response" class="response"></div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <h3><span class="method">GET</span> <span class="url">/api/git/streak</span></h3>
+                    <p>Get user's contribution streak information</p>
+                    <div class="test-form">
+                        <input type="text" id="git-streak-input" placeholder="GitHub username" value="reinanbr">
+                        <button onclick="testGitStreak()">Test API</button>
+                        <div id="git-streak-response" class="response"></div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <h3><span class="method">GET</span> <span class="url">/api/git/commit</span></h3>
+                    <p>Get detailed commit history and contribution calendar</p>
+                    <div class="test-form">
+                        <input type="text" id="git-commit-input" placeholder="GitHub username" value="reinanbr">
+                        <button onclick="testGitCommit()">Test API</button>
+                        <div id="git-commit-response" class="response"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="api-section">
+                <h2>💻 LeetCode API</h2>
+                
+                <div class="endpoint">
+                    <h3><span class="method">GET</span> <span class="url">/api/leet/user</span></h3>
+                    <p>Get comprehensive user statistics from LeetCode</p>
+                    <div class="test-form">
+                        <input type="text" id="leet-user-input" placeholder="LeetCode username" value="reinanbr">
+                        <button onclick="testLeetUser()">Test API</button>
+                        <div id="leet-user-response" class="response"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="api-section">
+                <h2>🦉 Duolingo API</h2>
+                
+                <div class="endpoint">
+                    <h3><span class="method">GET</span> <span class="url">/api/duo/user</span></h3>
+                    <p>Get user profile and course progress from Duolingo</p>
+                    <div class="test-form">
+                        <input type="text" id="duo-user-input" placeholder="Duolingo username" value="reinanbr">
+                        <button onclick="testDuoUser()">Test API</button>
+                        <div id="duo-user-response" class="response"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>Made with ❤️ | API Git Leet Duo</p>
+            </div>
+        </div>
+
+        <script>
+            async function makeRequest(endpoint, username, responseId) {
+                const responseDiv = document.getElementById(responseId);
+                responseDiv.style.display = 'block';
+                responseDiv.innerHTML = '<div class="loading">Loading...</div>';
+                
+                try {
+                    const response = await fetch(`${endpoint}?user=${username}`);
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        responseDiv.innerHTML = `<div class="success">✅ Success (${response.status})</div><pre>${JSON.stringify(data, null, 2)}</pre>`;
+                    } else {
+                        responseDiv.innerHTML = `<div class="error">❌ Error (${response.status})</div><pre>${JSON.stringify(data, null, 2)}</pre>`;
+                    }
+                } catch (error) {
+                    responseDiv.innerHTML = `<div class="error">❌ Network Error</div><pre>${error.message}</pre>`;
+                }
+            }
+
+            function testGitUser() {
+                const username = document.getElementById('git-user-input').value;
+                makeRequest('/api/git/user', username, 'git-user-response');
+            }
+
+            function testGitRepos() {
+                const username = document.getElementById('git-repos-input').value;
+                makeRequest('/api/git/repos', username, 'git-repos-response');
+            }
+
+            function testGitLangs() {
+                const username = document.getElementById('git-langs-input').value;
+                makeRequest('/api/git/langs', username, 'git-langs-response');
+            }
+
+            function testGitStreak() {
+                const username = document.getElementById('git-streak-input').value;
+                makeRequest('/api/git/streak', username, 'git-streak-response');
+            }
+
+            function testGitCommit() {
+                const username = document.getElementById('git-commit-input').value;
+                makeRequest('/api/git/commit', username, 'git-commit-response');
+            }
+
+            function testLeetUser() {
+                const username = document.getElementById('leet-user-input').value;
+                makeRequest('/api/leet/user', username, 'leet-user-response');
+            }
+
+            function testDuoUser() {
+                const username = document.getElementById('duo-user-input').value;
+                makeRequest('/api/duo/user', username, 'duo-user-response');
+            }
+        </script>
     </body>
 </html>
