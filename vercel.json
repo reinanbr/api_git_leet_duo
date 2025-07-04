@@ -1,90 +1,89 @@
 {
-  "version": 2,
-  "builds": [
-      {
-          "src": "api/git/handler/commit.go",
-          "use": "@vercel/go"
-      },
-      {
-          "src":  "api/git/handler/user.go",
-          "use": "@vercel/go"
-      },
-      {
-          "src": "api/git/handler/streak.go",
-          "use": "@vercel/go"
-      },
-      {
-          "src": "api/git/handler/langs.go",
-          "use": "@vercel/go"
-      },
-       {
-          "src": "api/git/handler/repos.go",
-          "use": "@vercel/go"
-      },
-      {
-          "src":"api/duo/duo_user.go",
-          "use":"@vercel/go"
-      },
-      {
-          "src":"api/leet/leet_user.go",
-          "use":"@vercel/go"
-      }
-  ],
-  "rewrites": [
-      {
-          "source": "/",            
-          "destination": "/public/index.html" 
-      },
-      {
-          "source": "/api/git/commit",
-          "destination": "api/git/handler/commit.go"
-      },
-      {
-          "source": "/api/git/user",
-          "destination": "api/git/handler/user.go"
-      },
-      {
-          "source": "/api/git/langs",
-          "destination": "api/git/handler/langs.go"
-      },
-      {
-          "source": "/api/git/repos",
-          "destination": "api/git/handler/repos.go"
-      },
-      {
-          "source": "/api/git/streak",
-          "destination": "api/git/handler/streak.go"
-      },
-      {
-          "source":"/api/duo/user",
-          "destination":"api/duo/duo_user.go"
-      },
-      {
-          "source":"/api/leet/user",
-          "destination":"api/leet/leet_user.go"
-      },
-      { 
-          "source": "/api/doc", 
-          "destination": "/public/index.html"        }
-  ],
-  "cleanUrls": true,
-  "headers": [
-      {
-        "source": "/(.*)",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
-            "key": "Access-Control-Allow-Methods",
-            "value": "GET, POST, OPTIONS"
-          },
-          {
-            "key": "Access-Control-Allow-Headers",
-            "value": "Content-Type"
-          }
-        ]
-      }
-    ]
+    "version": 2,
+    "builds": [
+        {
+            "src": "api/git/handler/commit.go",
+            "use": "@vercel/go"
+        },
+        {
+            "src":  "api/git/handler/user.go",
+            "use": "@vercel/go"
+        },
+        {
+            "src": "api/git/handler/streak.go",
+            "use": "@vercel/go"
+        },
+        {
+            "src": "api/git/handler/langs.go",
+            "use": "@vercel/go"
+        },
+         {
+            "src": "api/git/handler/repos.go",
+            "use": "@vercel/go"
+        },
+        {
+            "src":"api/duo/duo_user.go",
+            "use":"@vercel/go"
+        },
+        {
+            "src":"api/leet/leet_user.go",
+            "use":"@vercel/go"
+        },
+        {"src":"api/git/git_info_painel.go",
+        "use":"@vercel/go"},
+        
+        {"src":"api/public/public_handler.go",
+        "use":"@vercel/go"}
+    ],
+    "rewrites": [
+        {
+            "source": "/api/git/commit",
+            "destination": "api/git/handler/commit.go"
+        },
+        {
+            "source": "/api/git/user",
+            "destination": "api/git/handler/user.go"
+        },
+        {
+            "source": "/api/git/langs",
+            "destination": "api/git/handler/langs.go"
+        },
+        {
+            "source": "/api/git/repos",
+            "destination": "api/git/handler/repos.go"
+        },
+        {
+            "source": "/api/git/streak",
+            "destination": "api/git/handler/streak.go"
+        },
+        {
+            "source":"/api/duo/user",
+            "destination":"api/duo/duo_user.go"
+        },
+        {
+            "source":"/api/leet/user",
+            "destination":"api/leet/leet_user.go"
+        },
+        { "source": "/api/doc", "destination": "api/public/" }
+    ],
+    "cleanUrls": true,
+    "headers": [
+        {
+          "source": "/(.*)",
+          "headers": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, POST, OPTIONS"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "Content-Type"
+            }
+          ]
+        }
+      ]
 }
