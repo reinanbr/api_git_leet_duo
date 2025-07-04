@@ -30,6 +30,8 @@
             "use":"@vercel/go"
         },
         {"src":"api/git/git_info_painel.go",
+        "use":"@vercel/go"},
+        {"src":"api/public_handler.go",
         "use":"@vercel/go"}
     ],
     "rewrites": [
@@ -62,8 +64,8 @@
             "destination":"api/leet/leet_user.go"
         },
         {
-            "source": "/doc/(.*)",
-            "destination": "public/"
+            "source": "/api/doc/(.*)",
+            "destination": "api/public_handler.go"
         }
     ],
     "cleanUrls": true,
