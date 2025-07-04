@@ -71,6 +71,35 @@
                 transform: scale(1.05);
                 box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             }
+
+            .fork-me {
+                position: fixed;
+                top: 20px;
+                right: 100px;
+                background: #24292e;
+                color: white;
+                text-decoration: none;
+                padding: 8px 12px;
+                border-radius: 5px;
+                font-size: 0.9rem;
+                font-weight: bold;
+                z-index: 1000;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+
+            .fork-me:hover {
+                background: #0366d6;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                color: white;
+                text-decoration: none;
+            }
+
+            .fork-me::before {
+                content: "🔗";
+                margin-right: 5px;
+            }
             
             .header {
                 text-align: center;
@@ -215,6 +244,10 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div class="container">
+            <a href="https://github.com/reinanbr/api_git_leet_duo" target="_blank" class="fork-me">
+                Fork me on GitHub
+            </a>
+            
             <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle">
                 🌙
             </button>
