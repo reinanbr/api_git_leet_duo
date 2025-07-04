@@ -31,7 +31,8 @@
         },
         {"src":"api/git/git_info_painel.go",
         "use":"@vercel/go"},
-        {"src":"api/public_handler.go",
+        
+        {"src":"api/public/public_handler.go",
         "use":"@vercel/go"}
     ],
     "rewrites": [
@@ -65,7 +66,7 @@
         },
         {
             "source": "/api/doc",
-            "destination": "api/public_handler.go"
+            "destination": "api/public/public_handler.go"
         }
     ],
     "cleanUrls": true,
