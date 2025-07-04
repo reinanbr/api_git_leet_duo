@@ -5,10 +5,8 @@ import (
 )
 
 // Handler para servir arquivos estáticos do diretório public
-func PublicHandle() http.HandlerFunc {
+func PublicHandle(w http.ResponseWriter, r *http.Request) {
 	fs := http.FileServer(http.Dir("./public"))
-	return func(w http.ResponseWriter, r *http.Request) {
-		// Remove "/public/" do início da URL para mapear corretamente o arquivo
-		http.StripPrefix("/api/doc/", fs).ServeHTTP(w, r)
-	}
+	// Remove "/public/" do início da URL para mapear corretamente o arquivo
+	http.StripPrefix("/api/doc/", fs).ServeHTTP(w, r)
 }
