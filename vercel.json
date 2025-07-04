@@ -64,7 +64,7 @@
             "destination":"api/leet/leet_user.go"
         },
         {
-            "source": "/api/doc/(.*)",
+            "source": "/api/doc",
             "destination": "api/public_handler.go"
         }
     ],
