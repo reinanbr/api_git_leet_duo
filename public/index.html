@@ -9,6 +9,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>API Git Leet Duo - Documentation</title>
         <style>
+            :root {
+                --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                --bg-secondary: white;
+                --text-primary: #333;
+                --text-secondary: white;
+                --border-color: #dee2e6;
+                --section-bg: #f8f9fa;
+                --url-bg: #e9ecef;
+                --url-color: #495057;
+            }
+
+            [data-theme="dark"] {
+                --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                --bg-secondary: #2d3748;
+                --text-primary: #e2e8f0;
+                --text-secondary: #f7fafc;
+                --border-color: #4a5568;
+                --section-bg: #1a202c;
+                --url-bg: #4a5568;
+                --url-color: #e2e8f0;
+            }
+
             * {
                 margin: 0;
                 padding: 0;
@@ -18,9 +40,10 @@
             body {
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 line-height: 1.6;
-                color: #333;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: var(--text-primary);
+                background: var(--bg-primary);
                 min-height: 100vh;
+                transition: all 0.3s ease;
             }
             
             .container {
@@ -28,10 +51,30 @@
                 margin: 0 auto;
                 padding: 20px;
             }
+
+            .theme-toggle {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--bg-secondary);
+                border: 2px solid var(--border-color);
+                color: var(--text-primary);
+                padding: 10px 15px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-size: 1.1rem;
+                transition: all 0.3s ease;
+                z-index: 1000;
+            }
+
+            .theme-toggle:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            }
             
             .header {
                 text-align: center;
-                color: white;
+                color: var(--text-secondary);
                 margin-bottom: 40px;
             }
             
@@ -47,11 +90,12 @@
             }
             
             .api-section {
-                background: white;
+                background: var(--bg-secondary);
                 border-radius: 10px;
                 padding: 30px;
                 margin-bottom: 30px;
                 box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                transition: all 0.3s ease;
             }
             
             .api-section h2 {
@@ -63,15 +107,16 @@
             }
             
             .endpoint {
-                background: #f8f9fa;
+                background: var(--section-bg);
                 border-left: 4px solid #667eea;
                 padding: 20px;
                 margin: 20px 0;
                 border-radius: 5px;
+                transition: all 0.3s ease;
             }
             
             .endpoint h3 {
-                color: #333;
+                color: var(--text-primary);
                 margin-bottom: 10px;
                 font-size: 1.3rem;
             }
@@ -88,26 +133,28 @@
             
             .url {
                 font-family: 'Courier New', monospace;
-                background: #e9ecef;
+                background: var(--url-bg);
                 padding: 5px 10px;
                 border-radius: 3px;
-                color: #495057;
+                color: var(--url-color);
             }
             
             .test-form {
                 margin-top: 15px;
                 padding: 15px;
-                background: white;
+                background: var(--bg-secondary);
                 border-radius: 5px;
-                border: 1px solid #dee2e6;
+                border: 1px solid var(--border-color);
             }
             
             .test-form input {
                 padding: 8px 12px;
-                border: 1px solid #ced4da;
+                border: 1px solid var(--border-color);
                 border-radius: 4px;
                 margin-right: 10px;
                 width: 200px;
+                background: var(--bg-secondary);
+                color: var(--text-primary);
             }
             
             .test-form button {
@@ -127,9 +174,9 @@
             .response {
                 margin-top: 15px;
                 padding: 15px;
-                background: #f8f9fa;
+                background: var(--section-bg);
                 border-radius: 5px;
-                border: 1px solid #dee2e6;
+                border: 1px solid var(--border-color);
                 max-height: 300px;
                 overflow-y: auto;
                 display: none;
@@ -139,6 +186,7 @@
                 margin: 0;
                 white-space: pre-wrap;
                 word-wrap: break-word;
+                color: var(--text-primary);
             }
             
             .loading {
@@ -156,7 +204,7 @@
             
             .footer {
                 text-align: center;
-                color: white;
+                color: var(--text-secondary);
                 margin-top: 40px;
                 opacity: 0.8;
             }
@@ -167,6 +215,10 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div class="container">
+            <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle">
+                🌙
+            </button>
+            
             <div class="header">
                 <h1>🚀 API Git Leet Duo</h1>
                 <p>Comprehensive API for GitHub, LeetCode, and Duolingo data</p>
@@ -260,6 +312,23 @@
         </div>
 
         <script>
+            // Theme management
+            let currentTheme = localStorage.getItem('theme') || 'light';
+            
+            function toggleTheme() {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                localStorage.setItem('theme', currentTheme);
+                
+                const toggleBtn = document.getElementById('theme-toggle');
+                toggleBtn.innerHTML = currentTheme === 'light' ? '🌙' : '☀️';
+            }
+            
+            // Initialize theme
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            const toggleBtn = document.getElementById('theme-toggle');
+            toggleBtn.innerHTML = currentTheme === 'light' ? '🌙' : '☀️';
+
             async function makeRequest(endpoint, username, responseId) {
                 const responseDiv = document.getElementById(responseId);
                 responseDiv.style.display = 'block';
@@ -281,7 +350,7 @@
 
             function testGitUser() {
                 const username = document.getElementById('git-user-input').value;
-                makeRequest('/api/git/user', username, 'git-user-response');
+                makeRequest('https://api-git-leet-duo.vercel.app/api/git/user', username, 'git-user-response');
             }
 
             function testGitRepos() {
