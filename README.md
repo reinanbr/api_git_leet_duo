@@ -11,6 +11,12 @@ This API allows you to fetch user data from three popular platforms:
 
 ## Base URL
 
+**Production:**
+```
+https://api-git-leet-duo.vercel.app
+```
+
+**Local Development:**
 ```
 http://localhost:8080
 ```
@@ -41,6 +47,81 @@ http://localhost:8080
 4. **Test the API:**
    - Open http://localhost:8080 for the interactive documentation
    - Or test directly: `curl "http://localhost:8080/api/git/user?user=reinanbr"`
+
+**Production Examples:**
+```bash
+# GitHub User Profile
+curl "https://api-git-leet-duo.vercel.app/api/git/user?user=reinanbr"
+
+# GitHub Repositories
+curl "https://api-git-leet-duo.vercel.app/api/git/repos?user=reinanbr"
+
+# LeetCode User Stats
+curl "https://api-git-leet-duo.vercel.app/api/leet/user?user=reinanbr"
+
+# Duolingo User Profile
+curl "https://api-git-leet-duo.vercel.app/api/duo/user?user=reinanbr"
+```
+
+## Usage Examples
+
+### JavaScript/Node.js
+```javascript
+// GitHub User Profile
+const response = await fetch('https://api-git-leet-duo.vercel.app/api/git/user?user=reinanbr');
+const data = await response.json();
+console.log(data);
+
+// LeetCode User Stats
+const leetResponse = await fetch('https://api-git-leet-duo.vercel.app/api/leet/user?user=reinanbr');
+const leetData = await leetResponse.json();
+console.log(leetData);
+```
+
+### Python
+```python
+import requests
+
+# GitHub User Profile
+response = requests.get('https://api-git-leet-duo.vercel.app/api/git/user?user=reinanbr')
+data = response.json()
+print(data)
+
+# Duolingo User Profile
+duo_response = requests.get('https://api-git-leet-duo.vercel.app/api/duo/user?user=reinanbr')
+duo_data = duo_response.json()
+print(duo_data)
+```
+
+### cURL
+```bash
+# GitHub User Profile
+curl "https://api-git-leet-duo.vercel.app/api/git/user?user=reinanbr"
+
+# GitHub Repositories with pretty JSON
+curl "https://api-git-leet-duo.vercel.app/api/git/repos?user=reinanbr" | jq
+
+# LeetCode User Stats
+curl "https://api-git-leet-duo.vercel.app/api/leet/user?user=reinanbr"
+
+# Duolingo User Profile
+curl "https://api-git-leet-duo.vercel.app/api/duo/user?user=reinanbr"
+```
+
+### PHP
+```php
+<?php
+// GitHub User Profile
+$response = file_get_contents('https://api-git-leet-duo.vercel.app/api/git/user?user=reinanbr');
+$data = json_decode($response, true);
+print_r($data);
+
+// LeetCode User Stats
+$leetResponse = file_get_contents('https://api-git-leet-duo.vercel.app/api/leet/user?user=reinanbr');
+$leetData = json_decode($leetResponse, true);
+print_r($leetData);
+?>
+```
 
 ## API Endpoints
 

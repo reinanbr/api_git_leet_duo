@@ -286,32 +286,32 @@
 
             function testGitRepos() {
                 const username = document.getElementById('git-repos-input').value;
-                makeRequest('/api/git/repos', username, 'git-repos-response');
+                makeRequest('https://api-git-leet-duo.vercel.app/api/git/repos', username, 'git-repos-response');
             }
 
             function testGitLangs() {
                 const username = document.getElementById('git-langs-input').value;
-                makeRequest('/api/git/langs', username, 'git-langs-response');
+                makeRequest('https://api-git-leet-duo.vercel.app/api/git/langs', username, 'git-langs-response');
             }
 
             function testGitStreak() {
                 const username = document.getElementById('git-streak-input').value;
-                makeRequest('/api/git/streak', username, 'git-streak-response');
+                makeRequest('https://api-git-leet-duo.vercel.app/api/git/streak', username, 'git-streak-response');
             }
 
             function testGitCommit() {
                 const username = document.getElementById('git-commit-input').value;
-                makeRequest('/api/git/commit', username, 'git-commit-response');
+                makeRequest('https://api-git-leet-duo.vercel.app/api/git/commit', username, 'git-commit-response');
             }
 
             function testLeetUser() {
                 const username = document.getElementById('leet-user-input').value;
-                makeRequest('/api/leet/user', username, 'leet-user-response');
+                makeRequest('https://api-git-leet-duo.vercel.app/api/leet/user', username, 'leet-user-response');
             }
 
             function testDuoUser() {
                 const username = document.getElementById('duo-user-input').value;
-                makeRequest('/api/duo/user', username, 'duo-user-response');
+                makeRequest('https://api-git-leet-duo.vercel.app/api/duo/user', username, 'duo-user-response');
             }
         </script>
     </body>
